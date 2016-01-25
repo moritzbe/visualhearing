@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>NodeJS Starter Application</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/moritz.css">
+<!--     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous"> -->
+  </head>
+
+  <body>
+
+  	
+
+
+		<video id="video" width="100%" height="100%" autoplay></video>
+		<canvas id="canvas" width="640" height="480"></canvas>
+		<script type="text/javascript">
+	
+			var context = null;
+
+			window.addEventListener("DOMContentLoaded", function() {
+			// Grab elements, create settings, etc.
+			var canvas = document.getElementById("canvas"),
+				video = document.getElementById("video"),
+				videoObj = { "video": true },
+				errBack = function(error) {
+					console.log("Video capture error: ", error.code); 
+				};
+				context = canvas.getContext("2d");
+				// console.log(context);
+
+			// Put video listeners into place
+			if(navigator.getUserMedia) { // Standard
+				navigator.getUserMedia(videoObj, function(stream) {
+					video.src = stream;
+					video.play();
+				}, errBack);
+			} else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
+				navigator.webkitGetUserMedia(videoObj, function(stream){
+					video.src = window.webkitURL.createObjectURL(stream);
+					video.play();
+				}, errBack);
+			}
+			else if(navigator.mozGetUserMedia) { // Firefox-prefixed
+				navigator.mozGetUserMedia(videoObj, function(stream){
+					video.src = window.URL.createObjectURL(stream);
+					video.play();
+				}, errBack);
+			}
+			function loader() {
+				context.drawImage(video, 20, 0, 640, 480);
+				console.log("jo");
+			};
+			loader();
+
+		}, false);
+		</script>
+
+
+
+		<div class="background outer">
+		  <div class="inner transbox transbox2" id="toggler">
+		    <p id="startview" class="show">Press Start<p>
+		   	<p id="arrow" class="hide"> ->>> <p>
+		   		<div id="textbox" class="hide">
+		   			hier wird abartig gelabert lorem ipsum sit ametjefwkrbjhbe egjbaerjh aergjaer arhjbarf arfhbarf asrfhjlbarf asrfjhsarf iasrfjhbasrf asrfjhbsarf asrfjhbasrf brhf aefkja hjbaefjhb jahbefjhb jbahefjhb aefjhbaefh hjbaef hjaefjh jhfhej jhbefjhbae jhaefjh jabhefhjb jaefjh b hejahefbjae 
+		   		</div>
+
+		  </div>
+		</div>
+
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
+    </script>
+    <script src="js/moritz.js">
+    </script>
+  </body>
+</html>
